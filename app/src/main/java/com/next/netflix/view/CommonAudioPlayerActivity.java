@@ -54,9 +54,20 @@ public class CommonAudioPlayerActivity extends AppCompatActivity {
     private void playMusic() {
         try{
             ring.start();
-        }catch(Exception e){
+        }catch(Exception e) {
             e.printStackTrace();
-            Log.d(TAG, "playMusicException: "+e);
+            Log.d(TAG, "playMusicException: " + e);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            overridePendingTransition(R.anim.enter, R.anim.exit);
+            ring.stop();
+        }catch (Exception e){
+            Log.d(TAG, "onPauseException: "+e);
         }
 
     }
